@@ -4,11 +4,15 @@
 
 ### development
 
-პრერეკვიზიტები. valgrind, zip 
+პრერეკვიზიტები. valgrind, zip, curl
 
 ```sh
 sudo apt-get install valgrind #ubuntu
 yay -S valgrind #arch
+
+sudo apt-get install libcurl4-gnutls-dev #ubuntu
+(32-ბიტიანი ვერსია: sudo apt-get install libcurl4-gnutls-dev:i386 #ubuntu)
+sudo pacman -S libcurl-gnutls #arch
 ```
 
 build

@@ -16,7 +16,7 @@ ifeq ($(OSTYPE), solaris)
 endif
 
 CFLAGS = -g  -m32 -Wall -std=gnu99 -Wno-unused-function $(DFLAG)
-LDFLAGS = -g $(SOCKETLIB) -lnsl -lrssnews -L linux
+LDFLAGS = -g $(SOCKETLIB) -lnsl -lrssnews -lcurl -Llinux
 PFLAGS= -linker=/usr/pubsw/bin/ld -best-effort
 
 EFENCELIBS= -L/usr/class/cs107/lib -lefence  -pthread
@@ -41,10 +41,10 @@ pure : $(TARGET-PURE)
 rss-news-search.purify : $(OBJS)
 	purify -cache-dir=/tmp $(PFLAGS) $(CC) $(OBJS) $(CFLAGS)$(LDFLAGS) -o $@
 
-# The dependencies below make use of make's default rules,
-# under which a .o automatically depends on its .c and
-# the action taken uses the $(CC) and $(CFLAGS) variables.
-# These lines describe a few extra dependencies involved
+#The dependencies below make use of make's default rules,
+#under which a.o automatically depends on its.c and
+#the action taken uses the $(CC) and $(CFLAGS) variables.
+#These lines describe a few extra dependencies involved
 
 clean : 
 	@echo "Removing all object files..."
