@@ -36,7 +36,7 @@ static bool WordIsWellFormed(const char *word);
  *
  * Think very carefully about how you're going to keep track of
  * all of the stop words, how you're going to keep track of
- * all the previously seen articles, and how you're going to 
+ * all the previously seen articles, and how you're going to
  * map words to the collection of news articles where that
  * word appears.
  */
@@ -60,6 +60,32 @@ size_t SavePage(char* ptr, size_t size, size_t nmemb, void* data) {
   return fprintf((FILE*)data, "%s", ptr);
 }
 
+static FILE* RemoveCData(const char* tmpFile) {
+  FILE* inp = fopen(tmpFile, "rb");
+  fseek(inp, 0, SEEK_END);
+  long fsize = ftell(inp);
+  fseek(inp, 0, SEEK_SET);  /* same as rewind(f); */
+  char *contents = malloc(fsize + 1);
+  long read = fread(contents, 1, fsize, inp);
+  assert(fsize == read);
+  fclose(inp);
+  FILE* out = fopen(tmpFile, "w");
+  bool inside_cdata = false;
+  for (int i = 0; i < fsize; ++i) {
+    if (strncasecmp(contents + i, "<![CDATA[", strlen("<![CDATA[")) == 0) {
+      inside_cdata = true;
+      i += strlen("<![CDATA[") - 1;
+    } else if (inside_cdata && strncmp(contents + i, "]]>", 3) == 0) {
+      inside_cdata = false;
+      i += 2;
+    } else {
+      fprintf(out, "%c", contents[i]);
+    }
+  }
+  fclose(out);
+  return fopen(tmpFile, "r");
+}
+
 static FILE* FetchURL(const char* path, const char* tmpFile) {
   FILE* tmpDoc = fopen(tmpFile, "w");
   CURL *curl;
@@ -76,7 +102,7 @@ static FILE* FetchURL(const char* path, const char* tmpFile) {
   if (res != CURLE_OK) {
     return NULL;
   }
-  return fopen(tmpFile, "r");
+  return RemoveCData(tmpFile);
 }
 
 
@@ -360,7 +386,7 @@ static void ParseArticle(const char *articleTitle, const char *articleDescriptio
     printf("Unable to fetch URL: %s\n", articleURL);
     return;
   }
-  printf("Scanning \"%s\" \"%s\"\n", articleTitle, articleURL);
+  printf("Scanning \"%s\"\n", articleTitle);
   streamtokenizer st;
   STNew(&st, tmpDoc, kTextDelimiters, false);
   ScanArticle(&st, articleTitle, articleDescription, articleURL);
