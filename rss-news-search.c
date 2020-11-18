@@ -52,6 +52,7 @@ static const char *const kTextDelimiters =
     " \t\n\r\b!@$%^*()_+={[}]|\\'\":;/?.>,<~`";
 
 int main(int argc, char **argv) {
+  setbuf(stdout, NULL);
   curl_global_init(CURL_GLOBAL_DEFAULT);
   Welcome(kWelcomeTextFile);
   BuildIndices((argc == 1) ? kDefaultFeedsFile : argv[1]);
