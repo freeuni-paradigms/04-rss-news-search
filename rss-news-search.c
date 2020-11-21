@@ -477,8 +477,7 @@ static void ScanArticle(streamtokenizer *st, const char *articleTitle,
 static void QueryIndices() {
   char response[1024];
   while (true) {
-    printf("Please enter a single query term that might be in our set of "
-           "indices [enter to quit]: ");
+    printf("Please enter a single search term [enter to break]: ");
     fgets(response, sizeof(response), stdin);
     response[strlen(response) - 1] = '\0';
     if (strcasecmp(response, "") == 0)
