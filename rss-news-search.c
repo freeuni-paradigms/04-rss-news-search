@@ -46,7 +46,7 @@ static bool WordIsWellFormed(const char *word);
  */
 
 static const char *const kWelcomeTextFile = "data/welcome.txt";
-static const char *const kDefaultFeedsFile = "data/rss-feeds.txt";
+static const char *const kDefaultFeedsFile = "data/test.txt.txt";
 static const char *const kFilePrefix = "file://";
 static const char *const kTextDelimiters =
     " \t\n\r\b!@$%^*()_+={[}]|\\'\":;/?.>,<~`";
