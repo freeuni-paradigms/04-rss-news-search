@@ -16,4 +16,4 @@ if [[ -z "$emailid" ]]; then
 	echo "emailid=$emailid" > $config_file
 fi
 
-zip $emailid rss-news-search.cc
+zip $emailid rss-news-search.c
