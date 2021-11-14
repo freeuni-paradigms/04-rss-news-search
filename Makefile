@@ -26,7 +26,7 @@ OBJS = $(SRCS:.c=.o)
 TARGET = rss-news-search
 TARGET-PURE = rss-news-search.purify
 
-default : $(TARGET)
+default : data $(TARGET)
 
 rss-news-search : $(OBJS)
 	$(CC) $(OBJS) $(CFLAGS)$(LDFLAGS) -o $@
