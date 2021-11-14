@@ -50,5 +50,10 @@ clean :
 	@echo "Removing all object files..."
 	/bin/rm -f *.o a.out core $(TARGET) $(TARGET-PURE)
 
+data:
+	git clone --depth 1 https://github.com/freeuni-paradigms/04-rss-news-search-data.git
+	mv 04-rss-news-search-data data
+
+
 TAGS : $(SRCS) $(HDRS)
 	etags -t $(SRCS) $(HDRS)
