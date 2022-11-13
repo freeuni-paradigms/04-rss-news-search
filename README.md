@@ -23,8 +23,8 @@ make data
 
 ## ტესტირება
 ```sh
-./assn-4-checker ./rss-news-search
-./assn-4-checker ./rss-news-search -m
+./assn-4-checker-64 ./rss-news-search
+./assn-4-checker-64 ./rss-news-search -m
 ```
 
 ## ჰეშირების ფუნქცია
