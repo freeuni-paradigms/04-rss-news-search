@@ -4,8 +4,12 @@
 ## საჭირო პაკეტები
 დაგჭირდებათ libcurl პაკეტის დაყენება
 ```sh
-sudo apt-get install libcurl4-gnutls-dev # 64bit
-sudo apt-get install libcurl4-gnutls-dev:i386 # 32bit
+dpkg --add-architecture i386
+apt update
+apt install gcc make
+apt install libcurl4-openssl-dev:i386
+apt install libnsl-dev:i386
+apt install gcc-multilib
 ```
 
 ## კომპილაცია
