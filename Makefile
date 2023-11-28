@@ -15,7 +15,7 @@ ifeq ($(OSTYPE), solaris)
 	SOCKETLIB = -lsocket
 endif
 
-CFLAGS = -g  -m32 -Wall -std=gnu99 -Wno-unused-function $(DFLAG)
+CFLAGS = -g  -m32 -no-pie -Wall -std=gnu99 -Wno-unused-function $(DFLAG)
 LDFLAGS = -g $(SOCKETLIB) -lnsl -lrssnews -lcurl -Llinux
 PFLAGS= -linker=/usr/pubsw/bin/ld -best-effort
 
